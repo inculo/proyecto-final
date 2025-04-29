@@ -1,0 +1,109 @@
+/* Reset general */
+body {
+    margin: 0;
+    background: #E5E6E4; /* Fondo gris claro */
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Contenedor principal */
+  .chat-wrapper {
+    width: 100%;
+    max-width: 720px;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: transparent;
+  }
+  
+  /* Contenedor de mensajes */
+  .chat-messages {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Mensajes (base general) */
+  .message {
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 85%;
+    display: inline-block;
+  }
+  
+  /* Mensajes del asistente */
+  .assistant {
+    align-self: flex-start;
+    background: #000000; /* fondo negro */
+    color: white; /* texto blanco */
+    border: 2px solid #000000; /* borde negro también */
+  }
+  
+  /* Mensajes del usuario */
+  .user {
+    align-self: flex-end;
+    background: transparent; /* fondo transparente */
+    color: #000000; /* texto negro */
+    border: 2px solid #000000; /* borde negro */
+  }
+  
+  /* Caja de input */
+  .chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    background: transparent;
+    border: 2px solid #000000;
+    border-radius: 8px;
+  }
+  
+  /* Input de texto */
+  .chat-input input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #000000;
+  }
+  
+  /* Botón de enviar */
+  .send-btn {
+    background: #BACCEA; /* Azul pastel */
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Hover sobre botón */
+  .send-btn:hover {
+    background: #aabedc;
+    transform: scale(1.05);
+  }
+  
+  /* Ícono SVG dentro del botón */
+  .send-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #000000; /* Gota negra */
+  }
+  
