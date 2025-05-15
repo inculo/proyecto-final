@@ -1,0 +1,25 @@
+{
+  "name": "proyecto_final_inigo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inculo/proyecto-final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inculo/proyecto-final/issues"
+  },
+  "homepage": "https://github.com/inculo/proyecto-final#readme",
+  "description": "",
+  "dependencies": {
+    "openai": "^4.98.0",
+    "vite": "^6.3.5"
+  }
+}

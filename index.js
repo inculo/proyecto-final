@@ -1,3 +1,5 @@
+import OpenAI from "openai";
+
 let port;
 let writer;
 let writtableStreamClosed;
@@ -19,15 +21,15 @@ portSelection.addEventListener('click', async () => {
 
     // Filtra controladores Arduino Uno por Vendor/Product ID
     // Estos valores los obtienes de internet según el modelo de arduino que compres
-    const filters = [
-      { usbVendorId: 0x2341, usbProductId: 0x0043 },
-      { usbVendorId: 0x2341, usbProductId: 0x0001 }
-    ];
+    // const  = [
+    //   { usbVendorId: 0x2341, usbProductId: 0x0043 },
+    //   { usbVendorId: 0x2341, usbProductId: 0x0001 }
+    // ];
 
     // Esta línea solicita al usuario seleccionar el puerto al que se quiere conectar
     // Esta acción solo se ejecuta una vez al hacer click en el botón de selección de puerto
     // El puerto seleccionado se guarda en la variable port
-    port = await navigator.serial.requestPort({filters});
+    port = await navigator.serial.requestPort({});
 
     // Abre el puerto seleccionado
     // Esta acción es necesaria para poder enviar y recibir datos a través del puerto
@@ -83,6 +85,11 @@ disconnectBtn.addEventListener('click', async () => {
 });
 
 sendBtn.addEventListener('click', async () => {
+    const client = new OpenAI({
+        apiKey: "",
+        dangerouslyAllowBrowser: true
+    });
+
   
   // user value handling
   const messageText = userInput.value.trim();
@@ -94,6 +101,30 @@ sendBtn.addEventListener('click', async () => {
     userInput.value = "";
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
+    console.log(messageDiv);
+
+    // Esto manda a chat gpt el prompt
+    const completion = await client.chat.completions.create({
+        model: "gpt-4.1",
+        messages: [
+            {
+                role: "user",
+                content: messageText,
+            },
+        ],
+    });
+
+    
+    const respuesta = completion.choices[0].message.content;
+
+    const divResponse = document.createElement("div");
+    divResponse.setAttribute("class", "message assistant");
+    divResponse.textContent = respuesta;
+
+    chatMessages.appendChild(divResponse);
+
+    
+    console.log(respuesta.split(" ").length);
 
     // Esta sección envía el valor al puerto serial
     // El valor se envía como un número entre 0 y 5000
@@ -101,8 +132,8 @@ sendBtn.addEventListener('click', async () => {
     // para que el Arduino abra la válvula el tiempo necesario
     if(writer){
       try{
-        const intValue = parseInt(messageText);
-        if(isNaN(intValue) || intValue < 0 || intValue > 5000){
+        const intValue = parseInt(respuesta)* 13.33;
+        if(isNaN(intValue) || intValue < 0 || intValue > 50000){
           console.error("El valor no es un número entre 0 y 5000");
           return;
         }
