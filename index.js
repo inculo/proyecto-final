@@ -86,7 +86,7 @@ disconnectBtn.addEventListener('click', async () => {
 
 sendBtn.addEventListener('click', async () => {
     const client = new OpenAI({
-        apiKey: "",
+        apiKey: process.env.APIKEY,
         dangerouslyAllowBrowser: true
     });
 
